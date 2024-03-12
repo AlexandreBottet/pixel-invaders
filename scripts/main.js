@@ -13,8 +13,15 @@ for (let i = 0; i < numOfRows; i++) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
 
+        cell.addEventListener('click', () => {
+            const currentColor = cell.style.backgroundColor;
+            cell.style.backgroundColor = currentColor === 'white' ? 'black' : 'white';
+        })
+
         row.appendChild(cell);
     }
 
     pixelGrid.appendChild(row);
 }
+
+
