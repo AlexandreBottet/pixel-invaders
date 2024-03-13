@@ -6,7 +6,9 @@ let numOfRows = 8;
 let numOfColumns = 8;
 
 function createGrid() {
-    pixelGrid.display = 'none';
+    while (pixelGrid.firstChild) {
+        pixelGrid.removeChild(pixelGrid.firstChild);
+    }
 
     for (let i = 0; i < numOfRows; i++) {
         const row = document.createElement('div');
