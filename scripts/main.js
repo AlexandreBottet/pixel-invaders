@@ -1,56 +1,66 @@
-const pixelGrid = document.getElementById('pixel-grid');
-const inputContainer = document.createElement('div');
-const form = document.getElementById('configuration');
-const sizeInput = document.createElement('input');
-const button = document.createElement('button');
+const app = {
+    pixelGrid: document.getElementById('pixel-grid'),
+    form: document.getElementById('configuration'),
+    sizeInput: null,
+    button: null,
+    numOfRows: 8,
+    numOfColumns: 8,
 
-
-inputContainer.classList.add('input-container');
-sizeInput.classList.add('size-input');
-sizeInput.placeholder = 'Taille de la grille';
-button.innerText = 'Valider';
-
-form.appendChild(inputContainer);
-inputContainer.appendChild(sizeInput);
-inputContainer.appendChild(button);
-
-button.addEventListener('click', changeSizeOfGrid);
-
-function createCell() {
-    const cell = document.createElement('div');
-    cell.classList.add('cell');
-    
-    cell.addEventListener('click', () => {
-        const currentColor = cell.style.backgroundColor;
-        cell.style.backgroundColor = currentColor === 'white' ? 'black' : 'white';
-    });
-    return cell;
-}
-
-function createGrid() {
-    while (pixelGrid.firstChild) {
-        pixelGrid.removeChild(pixelGrid.firstChild);
-    }
-
-    for (let i = 0; i < numOfRows; i++) {
-        const row = document.createElement('div');
-        row.classList.add('row');
-    
-        for (let j = 0; j < numOfColumns; j++) {
-            row.appendChild(createCell());
+    createGrid() {
+        while (this.pixelGrid.firstChild) {
+            this.pixelGrid.removeChild(this.pixelGrid.firstChild);
         }
+
+        for (let i = 0; i < this.numOfRows; i++) {
+            const row = document.createElement('div');
+            row.classList.add('row');
+        
+            for (let j = 0; j < this.numOfColumns; j++) {
+                row.appendChild(this.createCell());
+            }
+        
+            this.pixelGrid.appendChild(row);
+        }    
+    },
+
+    createCell() {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
     
-        pixelGrid.appendChild(row);
-    }    
+        cell.addEventListener('click', () => {
+            const currentColor = cell.style.backgroundColor;
+            cell.style.backgroundColor = currentColor === 'white' ? 'black' : 'white';
+        });
+        return cell;
+    },
+
+    createInputContainer() {
+        const inputContainer = document.createElement('div');
+        inputContainer.classList.add('input-container');
+        this.sizeInput = document.createElement('input');
+        this.sizeInput.classList.add('size-input');
+        this.sizeInput.placeholder = 'Taille de la grille';
+        this.button = document.createElement('button');
+        this.button.innerText = 'Valider';
+        this.button.addEventListener('click', this.changeSizeOfGrid.bind(this));
+        inputContainer.appendChild(this.sizeInput);
+        inputContainer.appendChild(this.button);
+        this.form.appendChild(inputContainer);
+    },
+
+    changeSizeOfGrid() {
+        const newSize = this.sizeInput.value;
+ 
+        this.numOfRows = newSize;
+        this.numOfColumns = newSize;
+        this.createGrid();
+            
+    },
+
+    init() {
+        this.createInputContainer();
+        this.createGrid();
+    }
 }
 
-function changeSizeOfGrid () {
-    numOfRows = parseInt(sizeInput.value);
-    numOfColumns = parseInt(sizeInput.value);
-
-    createGrid();
-}
-
-let numOfRows = 8;
-let numOfColumns = 8;
-createGrid();
+app.init();
