@@ -1,9 +1,31 @@
-// Creation of a basic grid.
-
 const pixelGrid = document.getElementById('pixel-grid');
+const inputContainer = document.createElement('div');
+const form = document.getElementById('configuration');
+const sizeInput = document.createElement('input');
+const button = document.createElement('button');
 
-let numOfRows = 8;
-let numOfColumns = 8;
+
+inputContainer.classList.add('input-container');
+sizeInput.classList.add('size-input');
+sizeInput.placeholder = 'Taille de la grille';
+button.innerText = 'Valider';
+
+form.appendChild(inputContainer);
+inputContainer.appendChild(sizeInput);
+inputContainer.appendChild(button);
+
+button.addEventListener('click', changeSizeOfGrid);
+
+function createCell() {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    
+    cell.addEventListener('click', () => {
+        const currentColor = cell.style.backgroundColor;
+        cell.style.backgroundColor = currentColor === 'white' ? 'black' : 'white';
+    });
+    return cell;
+}
 
 function createGrid() {
     while (pixelGrid.firstChild) {
@@ -15,43 +37,20 @@ function createGrid() {
         row.classList.add('row');
     
         for (let j = 0; j < numOfColumns; j++) {
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
-    
-            cell.addEventListener('click', () => {
-                const currentColor = cell.style.backgroundColor;
-                cell.style.backgroundColor = currentColor === 'white' ? 'black' : 'white';
-            })
-    
-            row.appendChild(cell);
+            row.appendChild(createCell());
         }
     
         pixelGrid.appendChild(row);
     }    
 }
 
-createGrid();
-
-// Creation of a form for changing the size of a grid.
-
-const form = document.getElementById('configuration');
-const inputContainer = document.createElement('div');
-inputContainer.classList.add('input-container');
-const sizeInput = document.createElement('input');
-sizeInput.classList.add('size-input');
-sizeInput.placeholder = 'Taille de la grille';
-const button = document.createElement('button');
-button.innerText = 'Valider';
-
-form.appendChild(inputContainer);
-inputContainer.appendChild(sizeInput);
-inputContainer.appendChild(button);
-
-button.addEventListener('click', changeSizeOfGrid);
-
 function changeSizeOfGrid () {
-    numOfRows = sizeInput.value;
-    numOfColumns = sizeInput.value;
+    numOfRows = parseInt(sizeInput.value);
+    numOfColumns = parseInt(sizeInput.value);
 
     createGrid();
 }
+
+let numOfRows = 8;
+let numOfColumns = 8;
+createGrid();
