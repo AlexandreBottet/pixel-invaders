@@ -30,7 +30,7 @@ function createGrid() {
 
 createGrid();
 
-// Changement de grille selon les informations entrées dans le formulaire.
+// Creation of a form for changing the size of a grid.
 
 const form = document.getElementById('configuration');
 const inputContainer = document.createElement('div');
@@ -45,3 +45,11 @@ form.appendChild(inputContainer);
 inputContainer.appendChild(sizeInput);
 inputContainer.appendChild(button);
 
+button.addEventListener('click', changeSizeOfGrid);
+
+function changeSizeOfGrid () {
+    numOfRows = sizeInput.value;
+    numOfColumns = sizeInput.value;
+
+    createGrid();
+}
