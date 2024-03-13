@@ -24,4 +24,18 @@ for (let i = 0; i < numOfRows; i++) {
     pixelGrid.appendChild(row);
 }
 
+// Changement de grille selon les informations entrées dans le formulaire.
+
+const form = document.getElementById('configuration');
+const inputContainer = document.createElement('div');
+inputContainer.classList.add('input-container');
+const sizeInput = document.createElement('input');
+sizeInput.classList.add('size-input');
+sizeInput.placeholder = 'Taille de la grille';
+const button = document.createElement('button');
+button.innerText = 'Valider';
+
+form.appendChild(inputContainer);
+inputContainer.appendChild(sizeInput);
+inputContainer.appendChild(button);
 
