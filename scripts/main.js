@@ -1,28 +1,34 @@
-// Creation of a board.
+// Creation of a basic grid.
 
 const pixelGrid = document.getElementById('pixel-grid');
 
 let numOfRows = 8;
 let numOfColumns = 8;
 
-for (let i = 0; i < numOfRows; i++) {
-    const row = document.createElement('div');
-    row.classList.add('row');
+function createGrid() {
+    pixelGrid.display = 'none';
 
-    for (let j = 0; j < numOfColumns; j++) {
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
-
-        cell.addEventListener('click', () => {
-            const currentColor = cell.style.backgroundColor;
-            cell.style.backgroundColor = currentColor === 'white' ? 'black' : 'white';
-        })
-
-        row.appendChild(cell);
-    }
-
-    pixelGrid.appendChild(row);
+    for (let i = 0; i < numOfRows; i++) {
+        const row = document.createElement('div');
+        row.classList.add('row');
+    
+        for (let j = 0; j < numOfColumns; j++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+    
+            cell.addEventListener('click', () => {
+                const currentColor = cell.style.backgroundColor;
+                cell.style.backgroundColor = currentColor === 'white' ? 'black' : 'white';
+            })
+    
+            row.appendChild(cell);
+        }
+    
+        pixelGrid.appendChild(row);
+    }    
 }
+
+createGrid();
 
 // Changement de grille selon les informations entrées dans le formulaire.
 
