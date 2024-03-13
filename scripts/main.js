@@ -50,11 +50,20 @@ const app = {
 
     changeSizeOfGrid() {
         const newSize = this.sizeInput.value;
- 
-        this.numOfRows = newSize;
-        this.numOfColumns = newSize;
-        this.createGrid();
-            
+
+        if (newSize <= 45) {
+            this.numOfRows = newSize;
+            this.numOfColumns = newSize;
+            this.createGrid();
+        } else {
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Il ne faut pas abuser des bonnes choses. S\'il te plaît, veille à ne rentrer qu\'une valeur inférieure à 46. Merci.';
+            errorMessage.id = 'error-message';
+            this.form.appendChild(errorMessage);
+            setTimeout(() => {
+                this.form.removeChild(errorMessage);
+            }, 5000)
+        }
     },
 
     init() {

@@ -33,6 +33,12 @@ button {
     color: white;
 }
 
+#error-message {
+    text-align: center;
+    color: white;
+    margin-top: 1rem;
+}
+
 /* GRID */
 
 #pixel-grid {
