@@ -77,7 +77,7 @@ const app = {
     changePixelSize() {
         const newSize = this.pixelInput.value;
 
-        if(newSize >= 10 && newSize <= 25) {
+        if (newSize >= 10 && newSize <= 25) {
             this.pixelWidth = `${newSize}px`;
             this.pixelHeigth = `${newSize}px`;  
         } else {
