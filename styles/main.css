@@ -23,6 +23,12 @@ body {
     border-bottom-left-radius: 10px;
 }
 
+.pixel-input {
+    padding: 1rem;
+    font-size: 1rem;
+    border: none;
+}   
+
 button {
     padding: 1rem;
     font-size: 1rem;
@@ -54,8 +60,6 @@ button {
 }
 
 .cell {
-    width: 15px;
-    height: 15px;
     background-color: #D1DAE2;
     border: 2px solid #808E9B;
 }
