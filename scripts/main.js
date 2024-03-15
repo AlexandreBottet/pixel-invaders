@@ -65,32 +65,46 @@ const app = {
     changeSizeOfGrid() {
         const newSize = this.sizeInput.value;
 
-        if (newSize <= 45) {
+        if (newSize >= 4 && newSize <= 45) {
             this.numOfRows = newSize;
             this.numOfColumns = newSize;
+            this.createGrid();
         } else {
-            const errorMessage = document.createElement('p');
-            errorMessage.textContent = 'Il ne faut pas abuser des bonnes choses. S\'il te plaît, veille à ne rentrer qu\'une valeur inférieure à 46. Merci.';
-            errorMessage.id = 'error-message';
-            this.form.appendChild(errorMessage);
-            setTimeout(() => {
-                this.form.removeChild(errorMessage);
-            }, 5000)
+            this.showError('Veuillez entrer une valeur comprise entre 4 et 45 pour la taille de la grille.');
         }
     },
     
     changePixelSize() {
         const newSize = this.pixelInput.value;
 
-        this.pixelWidth = `${newSize}px`;
-        this.pixelHeigth = `${newSize}px`;    
+        if(newSize >= 10 && newSize <= 25) {
+            this.pixelWidth = `${newSize}px`;
+            this.pixelHeigth = `${newSize}px`;  
+        } else {
+            this.showError('Veuillez entrer une valeur comprise entre 10 et 25 pour la taille des pixels.');
+        }
     },
 
     changeConfigurationOfGrid(e) {
         e.preventDefault();
-        this.changeSizeOfGrid();
+
+        if ((!this.sizeInput.value && !this.pixelInput.value)) {
+            this.showError('Veuillez remplir les deux champs.');
+            return;
+        }
+
         this.changePixelSize();
-        this.createGrid();
+        this.changeSizeOfGrid();
+    },
+
+    showError(message) {
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = message;
+        errorMessage.id = 'error-message';
+        this.form.appendChild(errorMessage);
+        setTimeout(() => {
+            this.form.removeChild(errorMessage);
+        }, 3000)
     },
 
     init() {
