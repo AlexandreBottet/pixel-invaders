@@ -59,12 +59,7 @@ const app = {
         inputContainer.appendChild(this.button);
         this.form.appendChild(inputContainer);
 
-        this.form.addEventListener('submit', e => {
-            e.preventDefault();
-            this.changeSizeOfGrid();
-            this.changePixelSize();
-            this.createGrid();
-        })
+        this.form.addEventListener('submit', this.changeConfigurationOfGrid.bind(this));
     },
 
     changeSizeOfGrid() {
@@ -89,6 +84,13 @@ const app = {
 
         this.pixelWidth = `${newSize}px`;
         this.pixelHeigth = `${newSize}px`;    
+    },
+
+    changeConfigurationOfGrid(e) {
+        e.preventDefault();
+        this.changeSizeOfGrid();
+        this.changePixelSize();
+        this.createGrid();
     },
 
     init() {
