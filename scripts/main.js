@@ -8,6 +8,7 @@ const app = {
     numOfColumns: 8,
     pixelWidth: '15px',
     pixelHeigth: '15px',
+    styles: ['plain', 'empty', 'light', 'highlight'],
 
     createGrid() {
         while (this.pixelGrid.firstChild) {
@@ -62,6 +63,21 @@ const app = {
         this.form.addEventListener('submit', this.changeConfigurationOfGrid.bind(this));
     },
 
+    createColorPalette() {
+        const body = document.body;
+        const palette = document.createElement('div');
+
+        palette.id = 'color-palette';
+        
+        for (let i = 0; i < this.styles.length; i++) {
+            const colorItem = document.createElement('button');
+            colorItem.classList.add('color-item', this.styles[i]);
+            palette.appendChild(colorItem);
+        }
+
+        body.appendChild(palette);
+    },
+
     changeSizeOfGrid() {
         const newSize = this.sizeInput.value;
 
@@ -108,6 +124,7 @@ const app = {
     init() {
         this.createInputContainer();
         this.createGrid();
+        this.createColorPalette();
     }
 }
 

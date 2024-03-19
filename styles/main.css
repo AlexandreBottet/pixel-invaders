@@ -51,7 +51,7 @@ button {
     display: flex;
     flex-direction: column;
     width: 30%;
-    margin: 10rem auto;
+    margin: 8rem auto;
 }
 
 .row {
@@ -62,4 +62,45 @@ button {
 .cell {
     background-color: #D1DAE2;
     border: 2px solid #808E9B;
+}
+
+/* COLOR PALETTE */
+
+#color-palette {
+    width: 20%;
+    padding: 1rem 0;
+    background-color: #4B46A3;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.color-item {
+    width: 15%;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.plain {
+    background-color: #D2DAE2;
+    border: 2px solid #7B869C;
+}
+
+.empty {
+    background-color: #485460;
+    border: 2px solid #202833;
+}
+
+.light {
+    background-color: #FBC049;
+    border: 2px solid #DB952F;
+}
+
+.highlight {
+    background-color: #79EA84;
+    border: 2px solid #59B474;
 }
