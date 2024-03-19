@@ -65,36 +65,34 @@ const app = {
     changeSizeOfGrid() {
         const newSize = this.sizeInput.value;
 
-        if (newSize >= 4 && newSize <= 45) {
-            this.numOfRows = newSize;
-            this.numOfColumns = newSize;
-            this.createGrid();
-        } else {
-            this.showError('Veuillez entrer une valeur comprise entre 4 et 45 pour la taille de la grille.');
-        }
+        this.numOfRows = newSize;
+        this.numOfColumns = newSize;
     },
     
     changePixelSize() {
         const newSize = this.pixelInput.value;
 
-        if (newSize >= 10 && newSize <= 25) {
-            this.pixelWidth = `${newSize}px`;
-            this.pixelHeigth = `${newSize}px`;  
-        } else {
-            this.showError('Veuillez entrer une valeur comprise entre 10 et 25 pour la taille des pixels.');
-        }
+        this.pixelWidth = `${newSize}px`;
+        this.pixelHeigth = `${newSize}px`;
     },
 
     changeConfigurationOfGrid(e) {
         e.preventDefault();
 
-        if ((!this.sizeInput.value && !this.pixelInput.value)) {
+        if (!this.sizeInput.value || !this.pixelInput.value) {
             this.showError('Veuillez remplir les deux champs.');
+            return;
+        } else if (this.sizeInput.value < 4 || this.sizeInput.value > 40) {
+            this.showError('Veuillez entrer une valeur comprise entre 4 et 40 pour la taille de la grille.');
+            return;
+        } else if (this.pixelInput.value < 10 || this.pixelInput.value > 20) {
+            this.showError('Veuillez entrer une valeur comprise entre 10 et 20 pour pouvoir changer la taille des pixels.');
             return;
         }
 
         this.changePixelSize();
         this.changeSizeOfGrid();
+        this.createGrid();
     },
 
     showError(message) {
